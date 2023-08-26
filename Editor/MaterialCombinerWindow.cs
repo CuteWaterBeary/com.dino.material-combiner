@@ -8,7 +8,7 @@ namespace Dino.MaterialCombiner {
         private const string PrefsPrefix = "MaterialCombiner/";
 
         private static readonly GUILayoutOption LabelOptions = GUILayout.Width(110);
-        
+
         [SerializeField] private GameObject[] Prefabs = new GameObject[0];
 
         private bool ClearDirectory {
@@ -25,18 +25,18 @@ namespace Dino.MaterialCombiner {
             get => EditorPrefs.GetInt(PrefsPrefix + nameof(MaxAtlasSize), 2048);
             set => EditorPrefs.SetInt(PrefsPrefix + nameof(MaxAtlasSize), value);
         }
-        
+
         private int MaxTiledChunkSize {
             get => EditorPrefs.GetInt(PrefsPrefix + nameof(MaxTiledChunkSize), 512);
             set => EditorPrefs.SetInt(PrefsPrefix + nameof(MaxTiledChunkSize), value);
         }
-        
+
         private int MaxSplittedMeshVertices {
             get => EditorPrefs.GetInt(PrefsPrefix + nameof(MaxSplittedMeshVertices), 1000);
             set => EditorPrefs.SetInt(PrefsPrefix + nameof(MaxSplittedMeshVertices), value);
         }
 
-        [MenuItem("Window/Material Combiner")]
+        [MenuItem("Mesh+Bones/Combine/Combine unskinned meshes and create atlas")]
         public static void ShowWindow() {
             GetWindow<MaterialCombinerWindow>("Material Combiner");
         }
@@ -72,7 +72,7 @@ namespace Dino.MaterialCombiner {
             var prefabsProperty = so.FindProperty(nameof(Prefabs));
             EditorGUILayout.PropertyField(prefabsProperty, includeChildren: true);
             so.ApplyModifiedProperties();
-            
+
             GUI.enabled = Prefabs != null && Prefabs.Length > 0;
             if (GUILayout.Button("Combine Materials and Adjust Models")) {
                 var materialCombiner = new MaterialCombiner(Path);
