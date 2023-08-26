@@ -1,7 +1,5 @@
-
-
-Material Combiner
-===
+Combine Static Meshes and Atlas
+===============================
 An editor tool used to optimise meshes and materials for better draw call batching.
 
 
